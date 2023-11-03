@@ -37,9 +37,12 @@ const reducerData = (state , action) => {
             status : 'active',
         }
 
-        case 'newAnswer' : return {
+        case 'newAnswer' : 
+        const question = state.dummy_data.at(state.index)
+        return {
             ...state,
-            answer : action.payLoad
+            answer : action.payLoad,
+            points : (action.payLoad === question.correctOption) ? (state.points + question.points) : state.points
         }
 
         case 'nextQuestion' : return {
