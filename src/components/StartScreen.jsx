@@ -11,7 +11,7 @@ const StartScreen = ({ QuestionsLength , dispatch }) => {
                 <p className = "text-lg">{QuestionsLength} questions to test your react mastery</p>
 
                 <div className = "w-full text-center pt-5">
-                    <Btn content = "let's start" type = 'start' dispatch = {dispatch}/>
+                    <Btn content = "let's start" type = 'active' dispatch = {dispatch}/>
                 </div>
             </div>
         </>
