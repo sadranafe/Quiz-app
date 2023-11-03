@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useReducer } from "react";
+
 import Div from "./basic_components/Div";
 import Loader from "./basic_components/Loader";
 import StartScreen from "./StartScreen";
 import Question from "./question/Question";
+import Btn from "./basic_components/Btn";
 
 const initialData = {
     dummy_data : [],
@@ -38,6 +40,12 @@ const reducerData = (state , action) => {
             ...state,
             answer : action.payLoad
         }
+
+        case 'nextQuestion' : return {
+            ...state,
+            index : state.index + 1,
+            answer : null,
+        }
     }
 }
 
@@ -55,7 +63,22 @@ const MainQuizContent = () => {
             <Div>
                 {status === 'loading' && <Loader/>}
                 {status === 'ready' && <StartScreen QuestionsLength = {dummy_data.length} dispatch = {dispatch} />}
-                {status === 'active' && <Question currentQuestion = {dummy_data[index]} dispatch = {dispatch} answer = {answer}/>}
+                {
+                    status === 'active' && 
+                    <>
+                        <Question currentQuestion = {dummy_data[index]} dispatch = {dispatch} answer = {answer}/>
+                        
+                        <div className = "w-7/12 text-end h-14 p-1">
+                            {
+                                answer !== null ?
+                                    index + 1 < dummy_data.length ?
+                                    <Btn type = 'nextQuestion' content = 'next' dispatch = {dispatch} /> :
+                                    <Btn type = 'finish' content = 'finish' dispatch = {dispatch} /> 
+                                : ''
+                            }
+                        </div>
+                    </>
+                }
             </Div>
         </>
     );
