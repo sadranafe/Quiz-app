@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+progress::-webkit-progress-bar {
+    @apply rounded-xl bg-neutral-600 overflow-hidden;
+}
+
+progress::-webkit-progress-value {
+    @apply bg-blue-700 rounded-xl;
+}
