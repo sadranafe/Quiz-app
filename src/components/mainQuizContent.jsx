@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useReducer } from "react";
 import Div from "./basic_components/Div";
+import Loader from "./basic_components/Loader";
 
 const initialData = {
     dummy_data : [],
@@ -29,7 +30,7 @@ const reducerData = (state , action) => {
 }
 
 const MainQuizContent = () => {
-    const [Data , dispatch] = useReducer(reducerData , initialData)
+    const [{dummy_data , status , index , answer} , dispatch] = useReducer(reducerData , initialData)
 
     useEffect(() => {
         axios.get('http://localhost:9000/questions')
@@ -40,7 +41,7 @@ const MainQuizContent = () => {
     return (
         <>
             <Div>
-                <p>this is a test</p>
+                {status !== 'loading' && <Loader/>}
             </Div>
         </>
     );
