@@ -6,6 +6,7 @@ import Loader from "./basic_components/Loader";
 import StartScreen from "./StartScreen";
 import Question from "./question/Question";
 import Btn from "./basic_components/Btn";
+import ProgressQuiz from "./ProgressQuiz";
 
 const initialData = {
     dummy_data : [],
@@ -46,11 +47,20 @@ const reducerData = (state , action) => {
             index : state.index + 1,
             answer : null,
         }
+
+        case 'finish' : return {
+            ...state,
+            status : 'finsish'
+        }
     }
 }
 
 const MainQuizContent = () => {
-    const [{dummy_data , status , index , answer} , dispatch] = useReducer(reducerData , initialData)
+    const [{dummy_data , status , index , answer , points} , dispatch] = useReducer(reducerData , initialData)
+
+    const maxPossiblePoints = dummy_data.reduce((prev , cur) => {
+        return prev + cur.points
+    },0)
 
     useEffect(() => {
         axios.get('http://localhost:9000/questions')
@@ -66,6 +76,8 @@ const MainQuizContent = () => {
                 {
                     status === 'active' && 
                     <>
+                        <ProgressQuiz index = {index} QuestionsLength = {dummy_data.length} points = {points} answer = {answer} maxPossiblePoints = {maxPossiblePoints}/>
+
                         <Question currentQuestion = {dummy_data[index]} dispatch = {dispatch} answer = {answer}/>
                         
                         <div className = "w-7/12 text-end h-14 p-1">
