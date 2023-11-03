@@ -1,3 +1,4 @@
+import React from "react";
 import Options from "./Options";
 
 const Question = ({ currentQuestion , answer , dispatch }) => {
@@ -13,9 +14,9 @@ const Question = ({ currentQuestion , answer , dispatch }) => {
                     {
                         options.map((opt , index) => {
                             return(
-                                <>
-                                    <Options key = {index} index = {index} option = {opt} answer = {answer} correctOption = {correctOption} dispatch = {dispatch}/>
-                                </>
+                                <React.Fragment key = {index}>
+                                    <Options index = {index} option = {opt} answer = {answer} correctOption = {correctOption} dispatch = {dispatch}/>
+                                </React.Fragment>
                             )
                         })
                     }
