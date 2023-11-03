@@ -3,6 +3,7 @@ import { useEffect, useReducer } from "react";
 import Div from "./basic_components/Div";
 import Loader from "./basic_components/Loader";
 import StartScreen from "./StartScreen";
+import Question from "./question/Question";
 
 const initialData = {
     dummy_data : [],
@@ -27,6 +28,16 @@ const reducerData = (state , action) => {
             ...state,
             status : 'error',
         }
+
+        case 'active' : return {
+            ...state,
+            status : 'active',
+        }
+
+        case 'newAnswer' : return {
+            ...state,
+            answer : action.payLoad
+        }
     }
 }
 
@@ -44,6 +55,7 @@ const MainQuizContent = () => {
             <Div>
                 {status === 'loading' && <Loader/>}
                 {status === 'ready' && <StartScreen QuestionsLength = {dummy_data.length} dispatch = {dispatch} />}
+                {status === 'active' && <Question currentQuestion = {dummy_data[index]} dispatch = {dispatch} answer = {answer}/>}
             </Div>
         </>
     );
