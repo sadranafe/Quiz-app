@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useReducer } from "react";
 import Div from "./basic_components/Div";
 import Loader from "./basic_components/Loader";
+import StartScreen from "./StartScreen";
 
 const initialData = {
     dummy_data : [],
@@ -42,6 +43,7 @@ const MainQuizContent = () => {
         <>
             <Div>
                 {status === 'loading' && <Loader/>}
+                {status === 'ready' && <StartScreen QuestionsLength = {dummy_data.length} dispatch = {dispatch} />}
             </Div>
         </>
     );
