@@ -41,7 +41,7 @@ const MainQuizContent = () => {
     return (
         <>
             <Div>
-                {status !== 'loading' && <Loader/>}
+                {status === 'loading' && <Loader/>}
             </Div>
         </>
     );
