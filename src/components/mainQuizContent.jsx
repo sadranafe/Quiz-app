@@ -7,16 +7,23 @@ import StartScreen from "./StartScreen";
 import Question from "./question/Question";
 import Btn from "./basic_components/Btn";
 import ProgressQuiz from "./ProgressQuiz";
+import Error from "./basic_components/Error";
+import FinishScreen from "./finishScreen";
+import Timer from "./Timer";
 
 const initialData = {
     dummy_data : [],
 
-    // status ==> loading error ready active finsish
+    // status ==> loading / error / ready / active / finsish
     status : 'loading',
     index : 0,
     answer : null,
     points : 0,
+    highScore : 0,
+    secondsRemaining : null,
 }
+
+const SEC_FOR_EACH_QUESTION = 40;
 
 
 const reducerData = (state , action) => {
@@ -35,6 +42,7 @@ const reducerData = (state , action) => {
         case 'active' : return {
             ...state,
             status : 'active',
+            secondsRemaining : state.dummy_data.length * SEC_FOR_EACH_QUESTION
         }
 
         case 'newAnswer' : 
@@ -53,15 +61,31 @@ const reducerData = (state , action) => {
 
         case 'finish' : return {
             ...state,
-            status : 'finsish'
+            status : 'finish',
+            highScore : state.points > state.highScore ? state.points : state.highScore,
         }
+
+        case 'reset' : return {
+            ...initialData,
+            status : 'ready',
+            dummy_data : state.dummy_data,
+            highScore : state.highScore,
+        }
+
+        case 'tick' : return {
+            ...state,
+            secondsRemaining : state.secondsRemaining - 1,
+            status : state.secondsRemaining === 0 ? 'finished' : state.status
+        }
+
+        default : throw new Error('unkown action')
     }
 }
 
 const MainQuizContent = () => {
-    const [{dummy_data , status , index , answer , points} , dispatch] = useReducer(reducerData , initialData)
+    const [{dummy_data , status , index , answer , points , highScore , secondsRemaining} , dispatch] = useReducer(reducerData , initialData)
 
-    const maxPossiblePoints = dummy_data.reduce((prev , cur) => {
+    const maxPossiblePoints = dummy_data.reduce( (prev , cur) => {
         return prev + cur.points
     },0)
 
@@ -75,13 +99,19 @@ const MainQuizContent = () => {
         <>
             <Div>
                 {status === 'loading' && <Loader/>}
+                
+                {status === 'error' && <Error/>}
+
                 {status === 'ready' && <StartScreen QuestionsLength = {dummy_data.length} dispatch = {dispatch} />}
+                
                 {
                     status === 'active' && 
                     <>
                         <ProgressQuiz index = {index} QuestionsLength = {dummy_data.length} points = {points} answer = {answer} maxPossiblePoints = {maxPossiblePoints}/>
 
                         <Question currentQuestion = {dummy_data[index]} dispatch = {dispatch} answer = {answer}/>
+
+                        <Timer dispatch = {dispatch} secondsRemaining = {secondsRemaining}/>
                         
                         <div className = "w-7/12 text-end h-14 p-1">
                             {
@@ -94,6 +124,9 @@ const MainQuizContent = () => {
                         </div>
                     </>
                 }
+
+                {status === 'finish' && <FinishScreen dispatch = {dispatch} points = {points} maxPossiblePoints = {maxPossiblePoints} highScore = {highScore}/>}
+
             </Div>
         </>
     );
