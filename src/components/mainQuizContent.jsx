@@ -90,7 +90,7 @@ const MainQuizContent = () => {
     },0)
 
     useEffect(() => {
-        axios.get('http://localhost:9000/questions')
+        axios.get('https://654928d1dd8ebcd4ab2445e0.mockapi.io/questions')
         .then(res => dispatch({type : 'dataReceived' , payLoad : res.data}))
         .catch(() => dispatch({type : 'dataFailed'}))
     },[])
