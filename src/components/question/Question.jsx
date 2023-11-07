@@ -6,12 +6,12 @@ const Question = ({ currentQuestion , answer , dispatch }) => {
 
     return (
         <>
-            <div className = "w-7/12 flex flex-wrap bg-r ed-300 justify-center items-center">
+            <div className = "w-7/12 max-[700px]:w-11/12 flex flex-wrap justify-center items-center">
                 <div className = "w-full text-center">
                     <h1 className = {question.length >= 69 ? "text-lg" : 'text-2xl'}>{question}</h1>
                 </div>
 
-                <div className = "flex flex-wrap justify-center items-center pt-5 w-11/12">
+                <div className = "flex flex-wrap justify-center items-center pt-5 w-11/12 max-[700px]:w-full">
                     {
                         options.map((opt , index) => {
                             return(

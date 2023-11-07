@@ -12,14 +12,14 @@ const FinishScreen = ({ points , maxPossiblePoints ,  dispatch , highScore }) =>
 
     return (
         <>
-            <div className = "flex flex-wrap justify-center items-center content-center">
-                <div className = 'bg-gradient-to-br from-blue-400 to-green-700 p-5 px-20 rounded-3xl text-lg'>
-                    <p className = "text-lg">
-                        <span className = "text-xl">{emoji}</span> you scored <strong className = "underline underline-offset-4">{points}</strong> out of {maxPossiblePoints} ({Math.ceil(PointsPercentage)}%)
+            <div className = "flex flex-wrap justify-center items-center content-center p-2">
+                <div className = 'bg-gradient-to-br from-blue-400 to-green-700 p-5 max-[480px]:px-7 px-20 rounded-3xl max-[480px]:text-sm text-lg'>
+                    <p>
+                        <span className = "t ext-xl">{emoji}</span> you scored <strong className = "underline underline-offset-4">{points}</strong> out of {maxPossiblePoints} ({Math.ceil(PointsPercentage)}%)
                     </p>
                 </div>
 
-                <div className = "w-full text-center mb-7 mt-3">
+                <div className = "w-full text-center mb-7 mt-3 max-[480px]:text-sm text-base">
                     <p>( HighScore : {highScore} points )</p>
                 </div>
 
