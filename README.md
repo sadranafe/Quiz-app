@@ -15,6 +15,7 @@ welcome to the Quiz App ! This React-based quiz application is designed to provi
 - Points System : Earn points for each correct answer, and track your total points throughout the quiz.
 - Percentage : At the end of the quiz, you can see your overall percentage score based on your correct answers.
 - instant answering : after you click on an option you like, you can see the correct answer.
+- responsive : The app's responsive design ensures an optimal UI across various devices. It allows users to enagage with the quiz seamlessly, whether on a desktop, tablet , or smartphone.
 
 ## Getting Started
 To get started with the Quiz App , follow these simple steps :
