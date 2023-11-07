@@ -75,7 +75,7 @@ const reducerData = (state , action) => {
         case 'tick' : return {
             ...state,
             secondsRemaining : state.secondsRemaining - 1,
-            status : state.secondsRemaining === 0 ? 'finished' : state.status
+            status : state.secondsRemaining === 0 ? 'finish' : state.status
         }
 
         default : throw new Error('unkown action')
