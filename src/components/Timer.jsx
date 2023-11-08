@@ -15,7 +15,7 @@ const Timer = ({ dispatch , secondsRemaining }) => {
     
     return (
         <>
-            <div className = "text-white mt-3">
+            <div className = "dark:text-white text-black mt-3">
                 <p className = "border border-neutral-700 w-fit p-2 px-4 rounded-xl">{mins < 10 && '0'}{mins} : {seconds < 10 && '0'}{seconds}</p>
             </div>
         </>

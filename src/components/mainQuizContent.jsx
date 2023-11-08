@@ -111,7 +111,7 @@ const MainQuizContent = () => {
 
                         <Question currentQuestion = {dummy_data[index]} dispatch = {dispatch} answer = {answer}/>
 
-                        <div className = "w-7/12 h-14 p-1 flex flex-wrap justify-between">
+                        <div className = "w-7/12 h-14 pb-20 pt-2 flex flex-wrap justify-between">
                             <Timer dispatch = {dispatch} secondsRemaining = {secondsRemaining}/>
                             {
                                 answer !== null ?

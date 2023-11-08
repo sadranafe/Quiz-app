@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 progress::-webkit-progress-bar {
-    @apply rounded-xl bg-neutral-600 overflow-hidden;
+    @apply rounded-xl dark:bg-neutral-600 bg-neutral-300 overflow-hidden;
 }
 
 progress::-webkit-progress-value {
